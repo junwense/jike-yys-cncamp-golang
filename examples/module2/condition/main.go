@@ -33,6 +33,7 @@ func (q *Queue) Enqueue(item string) {
 	defer q.cond.L.Unlock()
 	q.queue = append(q.queue, item)
 	fmt.Printf("putting %s to queue, notify all\n", item)
+	//通知消费者
 	q.cond.Broadcast()
 }
 
@@ -41,6 +42,7 @@ func (q *Queue) Dequeue() string {
 	defer q.cond.L.Unlock()
 	for len(q.queue) == 0 {
 		fmt.Println("no data available, wait")
+		//cond阻塞
 		q.cond.Wait()
 	}
 	result := q.queue[0]

@@ -7,6 +7,7 @@ import (
 	"runtime/pprof"
 )
 
+//go tool pprof /tmp/cpuprofile 查看文件
 var cpuprofile = flag.String("cpuprofile", "/tmp/cpuprofile", "write cpu profile to file")
 
 func main() {
