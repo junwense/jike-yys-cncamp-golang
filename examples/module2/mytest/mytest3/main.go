@@ -5,6 +5,9 @@ import (
 	"time"
 )
 
+/**
+使用 chan 进行多生产者消费者
+*/
 func main() {
 
 	c := make(chan string, 10)

@@ -11,6 +11,9 @@ type Queue struct {
 	cond  *sync.Cond
 }
 
+/**
+使用 cond 进行多生产者消费者
+*/
 func main() {
 	q := Queue{
 		queue: []string{},
