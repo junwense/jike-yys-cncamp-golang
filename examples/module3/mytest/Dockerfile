@@ -1,14 +1,15 @@
-FROM golang:1.17 AS build
-WORKDIR /build
-COPY . .
-ENV GO111MODULE=off\
+FROM golang:1.17 AS builder
+
+ENV GO111MODULE=off \
     CGO_ENABLED=0 \
     GOOS=linux  \
-    GOARCH=amd64 \
+    GOARCH=amd64
 
+WORKDIR /build
+COPY . .
 RUN go build -o httpserver .
 
-FROM alpine
+FROM scratch
 COPY --from=builder /build/httpserver /
 EXPOSE 8080
 ENTRYPOINT ["/httpserver"]
